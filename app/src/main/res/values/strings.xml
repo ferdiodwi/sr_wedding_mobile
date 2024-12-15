@@ -4,4 +4,18 @@
     <string name="close_nav">Close Navigation Drawer</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="venue_type">
+        <item>Indoor</item>
+        <item>Outdoor</item>
+        <item>Beach</item>
+        <item>Garden</item>
+    </string-array>
+
+    <string-array name="wedding_seasons">
+        <item>Musim panas</item>
+        <item>Musim dingin</item>
+        <item>Musim semi</item>
+        <item>Musim gugur</item>
+    </string-array>
 </resources>
