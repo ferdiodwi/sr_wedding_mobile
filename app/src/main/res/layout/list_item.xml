@@ -10,7 +10,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
-        android:contentDescription="Wedding option image" />
+        android:contentDescription="Opsi Gambar Pernikahan " />
 
     <TextView
         android:id="@+id/itemName"
@@ -26,4 +26,3 @@
         android:textSize="16sp"
         android:textColor="@color/black" />
 </LinearLayout>
-

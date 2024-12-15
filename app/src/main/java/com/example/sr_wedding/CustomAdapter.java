@@ -44,11 +44,15 @@ public class CustomAdapter extends ArrayAdapter<SpinnerItem> {
         if (currentItem != null) {
             holder.imageView.setImageResource(currentItem.getImageResId());
             holder.textViewName.setText(currentItem.getName());
-            holder.textViewCost.setText("$" + currentItem.getCost());
+
+            // Format the cost in Rupiah (IDR)
+            String formattedCost = "Rp" + String.format("%,d", currentItem.getCost());
+            holder.textViewCost.setText(formattedCost); // Displaying price in Rupiah
         }
 
         return convertView;
     }
+
 
     // ViewHolder class to hold the views
     static class ViewHolder {

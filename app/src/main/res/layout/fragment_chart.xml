@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose Your Wedding Preferences"
+            android:text="Pilih Tema Pernikahan Anda"
             android:textSize="24sp"
             android:textColor="#c2185b"
             android:gravity="center"
@@ -26,21 +26,21 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Preferred Colors:"
+            android:text="Tema Warna:"
             android:textSize="18sp" />
 
         <EditText
             android:id="@+id/inputColors"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="E.g., Pink, White, Gold"
+            android:hint="Contoh: Pink, White, Gold"
             android:inputType="text" />
 
         <!-- Venue Type Input -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Venue Type:"
+            android:text="Jenis Tempat:"
             android:textSize="18sp"
             android:paddingTop="8dp" />
 
@@ -54,7 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wedding Season:"
+            android:text="Tema Pernikahan:"
             android:textSize="18sp"
             android:paddingTop="8dp" />
 
@@ -69,7 +69,7 @@
             android:id="@+id/btnGetTheme"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Get AI Theme Suggestions"
+            android:text="Dapatkan Saran Tema Dari AI"
             android:textColor="#FFFFFF"
             android:layout_marginTop="16dp" />
 

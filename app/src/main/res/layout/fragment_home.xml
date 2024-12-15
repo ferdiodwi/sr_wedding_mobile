@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/imageViewLogo"
             android:layout_marginTop="16dp"
-            android:hint="Enter Bride's Name"
+            android:hint="Nama Pengantin Pria"
             android:padding="12dp"
             android:inputType="textPersonName" />
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/editTextBrideName"
             android:layout_marginTop="16dp"
-            android:hint="Enter Groom's Name"
+            android:hint="Nama Pengantin Wanita"
             android:padding="12dp"
             android:inputType="textPersonName" />
 
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/editTextGroomName"
             android:layout_marginTop="32dp"
-            android:text="Send Invitations" />
+            android:text="Bagikan Undangan" />
 
         <Button
             android:id="@+id/buttonExit"
@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/buttonInvitations"
             android:layout_marginTop="16dp"
-            android:text="Exit" />
+            android:text="Keluar" />
 
         <TextView
             android:id="@+id/textViewSelectedOptions1"

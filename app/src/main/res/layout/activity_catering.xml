@@ -10,7 +10,7 @@
         android:id="@+id/editTextGuestCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Guest Count"
+        android:hint="Masukkan Jumlah Tamu"
         android:inputType="number"
         android:minHeight="48dp"
         android:padding="12dp" />
@@ -19,7 +19,7 @@
         android:id="@+id/editTextFoodCost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Food Cost per Guest"
+        android:hint="Kisaran Harga Per Tamu"
         android:inputType="numberDecimal"
         android:minHeight="48dp"
         android:padding="12dp" />
@@ -28,7 +28,7 @@
         android:id="@+id/buttonCalculateCatering"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calculate Catering Cost"
+        android:text="Kalkulasi Harga"
         android:minHeight="48dp"
         android:padding="12dp"
         android:layout_marginTop="16dp"/> <!-- Optional margin for spacing -->
@@ -38,7 +38,7 @@
         android:id="@+id/textViewTotalCost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Total Catering Cost: $0.00"
+        android:text="Total Harga Catering: Rp 0.00"
         android:textSize="18sp"
         android:paddingTop="16dp" />
 </LinearLayout>

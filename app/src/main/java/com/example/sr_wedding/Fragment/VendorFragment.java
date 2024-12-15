@@ -24,43 +24,44 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link VendorFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Sebuah subclass sederhana dari {@link Fragment}.
+ * Gunakan metode pabrik {@link VendorFragment#newInstance} untuk
+ * membuat instance baru dari fragmen ini.
  */
 public class VendorFragment extends Fragment {
 
-    private ListView locationListView, dressListView, menDressListView;
-    private EditText guestCountEditText;
-    private Button calculateButton, cateringButton;
-    private TextView welcomeText, estimatedCostTextView;
-    private SpinnerItem selectedLocation, selectedDress, selectedMenDress;
+    private ListView daftarLokasi, daftarGaun, daftarGaunPria;
+    private EditText jumlahTamuEditText;
+    private Button tombolHitung, tombolCatering;
+    private TextView teksSelamatDatang, teksEstimasiBiaya;
+    private SpinnerItem lokasiTerpilih, gaunTerpilih, gaunPriaTerpilih;
     private static final String PREFS_NAME = "UserPrefs";
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    // TODO: Ganti nama argumen parameter, pilih nama yang sesuai
+    // dengan parameter inisialisasi fragmen, misalnya ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    // TODO: Ganti nama dan tipe parameter
     private String mParam1;
     private String mParam2;
 
     public VendorFragment() {
-        // Required empty public constructor
+        // Diperlukan konstruktor publik kosong
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Gunakan metode pabrik ini untuk membuat instance baru dari
+     * fragmen ini menggunakan parameter yang disediakan.
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment VendorFragment.
+     * @return Instance baru dari fragmen VendorFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static VendorFragment newInstance(String param1, String param2) {
         VendorFragment fragment = new VendorFragment();
         Bundle args = new Bundle();
@@ -82,93 +83,93 @@ public class VendorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate tata letak untuk fragmen ini
         View view = inflater.inflate(R.layout.fragment_vendor, container, false);
 
-        initializeViews(view);
-        setWelcomeMessage();
-        setupListViews();
-        setupListeners();
+        inisialisasiKomponen(view);
+        setelPesanSelamatDatang();
+        setelDaftarView();
+        setelPendengar();
 
         return view;
     }
 
-    private void initializeViews(View view) {
-        welcomeText = view.findViewById(R.id.welcomeText);
-        locationListView = view.findViewById(R.id.locationListView);
-        dressListView = view.findViewById(R.id.dressListView);
-        menDressListView = view.findViewById(R.id.menDressListView);
-        guestCountEditText = view.findViewById(R.id.editTextGuestCount);
-        calculateButton = view.findViewById(R.id.buttonCalculate);
-        cateringButton = view.findViewById(R.id.buttonCatering);
-        estimatedCostTextView = view.findViewById(R.id.textViewEstimatedCost);
+    private void inisialisasiKomponen(View view) {
+        teksSelamatDatang = view.findViewById(R.id.welcomeText);
+        daftarLokasi = view.findViewById(R.id.locationListView);
+        daftarGaun = view.findViewById(R.id.dressListView);
+        daftarGaunPria = view.findViewById(R.id.menDressListView);
+        jumlahTamuEditText = view.findViewById(R.id.editTextGuestCount);
+        tombolHitung = view.findViewById(R.id.buttonCalculate);
+        tombolCatering = view.findViewById(R.id.buttonCatering);
+        teksEstimasiBiaya = view.findViewById(R.id.textViewEstimatedCost);
     }
 
-    private void setWelcomeMessage() {
+    private void setelPesanSelamatDatang() {
         SharedPreferences preferences = requireActivity().getSharedPreferences(PREFS_NAME, getContext().MODE_PRIVATE);
-        String username = preferences.getString("username", "User");
-        welcomeText.setText("Welcome, " + username + "!");
+        String username = preferences.getString("username", "Pengguna");
+        teksSelamatDatang.setText("Selamat datang, " + username + "!");
     }
 
-    private void setupListViews() {
-        List<SpinnerItem> locations = new ArrayList<>();
-        locations.add(new SpinnerItem("Beach ", 500, R.drawable.beach));
-        locations.add(new SpinnerItem("Garden ", 300, R.drawable.garden));
-        locations.add(new SpinnerItem("Hall ", 700, R.drawable.hall));
-        locations.add(new SpinnerItem("Home ", 1000, R.drawable.home));
+    private void setelDaftarView() {
+        List<SpinnerItem> lokasi = new ArrayList<>();
+        lokasi.add(new SpinnerItem("Pantai", 7500000, R.drawable.beach));
+        lokasi.add(new SpinnerItem("Taman", 4500000, R.drawable.garden));
+        lokasi.add(new SpinnerItem("Aula", 10500000, R.drawable.hall));
+        lokasi.add(new SpinnerItem("Rumah", 15000000, R.drawable.home));
 
-        List<SpinnerItem> dresses = new ArrayList<>();
-        dresses.add(new SpinnerItem("Simple Dress ", 200, R.drawable.simpledress));
-        dresses.add(new SpinnerItem("Elegant Dress ", 500, R.drawable.elegantdress));
-        dresses.add(new SpinnerItem("Designer Dress ", 1000, R.drawable.designerdress));
-        dresses.add(new SpinnerItem("Custom Dress ", 800, R.drawable.customdress));
+        List<SpinnerItem> gaun = new ArrayList<>();
+        gaun.add(new SpinnerItem("Gaun Sederhana", 3000000, R.drawable.simpledress));
+        gaun.add(new SpinnerItem("Gaun Elegan", 7500000, R.drawable.elegantdress));
+        gaun.add(new SpinnerItem("Gaun Desainer", 15000000, R.drawable.designerdress));
+        gaun.add(new SpinnerItem("Gaun Kustom", 12000000, R.drawable.customdress));
 
-        List<SpinnerItem> menDresses = new ArrayList<>();
-        menDresses.add(new SpinnerItem("Classic Suit ", 300, R.drawable.m_simpledress));
-        menDresses.add(new SpinnerItem("Elegant Suit ", 600, R.drawable.m_elegantdress));
-        menDresses.add(new SpinnerItem("Designer Wear ", 400, R.drawable.m_designerdress));
-        menDresses.add(new SpinnerItem("Custom Suit ", 200, R.drawable.m_customdress));
+        List<SpinnerItem> gaunPria = new ArrayList<>();
+        gaunPria.add(new SpinnerItem("Setelan Klasik", 4500000, R.drawable.m_simpledress));
+        gaunPria.add(new SpinnerItem("Setelan Elegan", 9000000, R.drawable.m_elegantdress));
+        gaunPria.add(new SpinnerItem("Pakaian Desainer", 6000000, R.drawable.m_designerdress));
+        gaunPria.add(new SpinnerItem("Setelan Kustom", 3000000, R.drawable.m_customdress));
 
-        CustomAdapter locationAdapter = new CustomAdapter(getContext(), locations);
-        locationListView.setAdapter(locationAdapter);
+        CustomAdapter adapterLokasi = new CustomAdapter(getContext(), lokasi);
+        daftarLokasi.setAdapter(adapterLokasi);
 
-        CustomAdapter dressAdapter = new CustomAdapter(getContext(), dresses);
-        dressListView.setAdapter(dressAdapter);
+        CustomAdapter adapterGaun = new CustomAdapter(getContext(), gaun);
+        daftarGaun.setAdapter(adapterGaun);
 
-        CustomAdapter menDressAdapter = new CustomAdapter(getContext(), menDresses);
-        menDressListView.setAdapter(menDressAdapter);
+        CustomAdapter adapterGaunPria = new CustomAdapter(getContext(), gaunPria);
+        daftarGaunPria.setAdapter(adapterGaunPria);
     }
 
-    private void setupListeners() {
-        locationListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    private void setelPendengar() {
+        daftarLokasi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedLocation = (SpinnerItem) parent.getItemAtPosition(position);
+                lokasiTerpilih = (SpinnerItem) parent.getItemAtPosition(position);
             }
         });
 
-        dressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        daftarGaun.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedDress = (SpinnerItem) parent.getItemAtPosition(position);
+                gaunTerpilih = (SpinnerItem) parent.getItemAtPosition(position);
             }
         });
 
-        menDressListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        daftarGaunPria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedMenDress = (SpinnerItem) parent.getItemAtPosition(position);
+                gaunPriaTerpilih = (SpinnerItem) parent.getItemAtPosition(position);
             }
         });
 
-        calculateButton.setOnClickListener(new View.OnClickListener() {
+        tombolHitung.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calculateCost();
+                hitungBiaya();
             }
         });
 
-        cateringButton.setOnClickListener(new View.OnClickListener() {
+        tombolCatering.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), CateringActivity.class));
@@ -176,44 +177,50 @@ public class VendorFragment extends Fragment {
         });
     }
 
-    private void calculateCost() {
-        String guestCountString = guestCountEditText.getText().toString();
+    private void hitungBiaya() {
+        String jumlahTamuString = jumlahTamuEditText.getText().toString();
 
-        if (guestCountString.isEmpty() || selectedLocation == null || selectedDress == null || selectedMenDress == null) {
-            Toast.makeText(getContext(), "Please fill all fields", Toast.LENGTH_SHORT).show();
+        if (jumlahTamuString.isEmpty() || lokasiTerpilih == null || gaunTerpilih == null || gaunPriaTerpilih == null) {
+            Toast.makeText(getContext(), "Mohon isi semua bidang", Toast.LENGTH_SHORT).show();
             return;
         }
 
         try {
-            int guestCount = Integer.parseInt(guestCountString);
-            if (guestCount <= 0) {
-                Toast.makeText(getContext(), "Guest count must be greater than zero", Toast.LENGTH_SHORT).show();
+            int jumlahTamu = Integer.parseInt(jumlahTamuString);
+            if (jumlahTamu <= 0) {
+                Toast.makeText(getContext(), "Jumlah tamu harus lebih dari nol", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            double estimatedCost = calculateWeddingCost(selectedLocation, selectedDress, selectedMenDress, guestCount);
-            String costDetails = "Selected Location: " + selectedLocation.getName() + "\n" +
-                    "Selected Dress: " + selectedDress.getName() + "\n" +
-                    "Selected Men's Dress: " + selectedMenDress.getName() + "\n" +
-                    "Base Cost: $1000\n" +
-                    "Location Cost: $" + selectedLocation.getCost() + "\n" +
-                    "Dress Cost: $" + selectedDress.getCost() + "\n" +
-                    "Men's Dress Cost: $" + selectedMenDress.getCost() + "\n" +
-                    "Accommodation Cost per person: $50\n" +
-                    "Total Guest Count: " + guestCount + "\n" +
-                    "Estimated Cost: $" + estimatedCost;
+            double estimasiBiaya = hitungEstimasiBiayaPernikahan(lokasiTerpilih, gaunTerpilih, gaunPriaTerpilih, jumlahTamu);
 
-            estimatedCostTextView.setText(costDetails);
+            // Format angka ke dalam Rupiah
+            Locale localeID = new Locale("in", "ID");
+            NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+
+            String rincianBiaya = "Lokasi Terpilih: " + lokasiTerpilih.getName() + "\n" +
+                    "Gaun Terpilih: " + gaunTerpilih.getName() + "\n" +
+                    "Gaun Pria Terpilih: " + gaunPriaTerpilih.getName() + "\n" +
+                    "Biaya Dasar: Rp" + formatRupiah.format(1000000).replace("Rp", "").trim() + "\n" +
+                    "Biaya Lokasi: Rp" + formatRupiah.format(lokasiTerpilih.getCost()).replace("Rp", "").trim() + "\n" +
+                    "Biaya Gaun: Rp" + formatRupiah.format(gaunTerpilih.getCost()).replace("Rp", "").trim() + "\n" +
+                    "Biaya Gaun Pria: Rp" + formatRupiah.format(gaunPriaTerpilih.getCost()).replace("Rp", "").trim() + "\n" +
+                    "Biaya Akomodasi per Tamu: Rp" + formatRupiah.format(50000).replace("Rp", "").trim() + "\n" +
+                    "Jumlah Tamu: " + jumlahTamu + "\n" +
+                    "Estimasi Biaya: Rp" + formatRupiah.format(estimasiBiaya).replace("Rp", "").trim();
+
+            teksEstimasiBiaya.setText(rincianBiaya);
         } catch (NumberFormatException e) {
-            Toast.makeText(getContext(), "Invalid guest count", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Jumlah tamu tidak valid", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private double calculateWeddingCost(SpinnerItem location, SpinnerItem dress, SpinnerItem menDress, int guestCount) {
-        double baseCost = 1000;
-        double locationCost = location.getCost();
-        double dressCost = dress.getCost();
-        double menDressCost = menDress.getCost();
-        return baseCost + locationCost + dressCost + menDressCost + (guestCount * 50);
+    private double hitungEstimasiBiayaPernikahan(SpinnerItem lokasi, SpinnerItem gaun, SpinnerItem gaunPria, int jumlahTamu) {
+        // Semua biaya dalam Rupiah
+        double biayaDasar = 1000000; // Rp 1.000.000
+        double biayaLokasi = lokasi.getCost();
+        double biayaGaun = gaun.getCost();
+        double biayaGaunPria = gaunPria.getCost();
+        return biayaDasar + biayaLokasi + biayaGaun + biayaGaunPria + (jumlahTamu * 50000); // Rp 50.000 per tamu
     }
 }

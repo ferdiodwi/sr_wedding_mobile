@@ -9,13 +9,13 @@
 
     <item
         android:id="@+id/vendor"
-        android:title="Vendor"
+        android:title="Planing"
         android:icon="@drawable/shop_vendor_icon"
         />
 
     <item
         android:id="@+id/chart"
-        android:title="Chart"
+        android:title="Theme"
         android:icon="@drawable/baseline_shopping_cart_24" />
     <item
         android:id="@+id/profile"
